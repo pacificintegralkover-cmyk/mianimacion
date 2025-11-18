@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Imagen Girando</title>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    height: 200vh; /* espacio para hacer scroll */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    font-family: sans-serif;
+  }
+
+  .rotate-img {
+    width: 420px;
+    max-width: 90%;
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.03s linear;
+    position: fixed;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+</style>
+</head>
+
+<body>
+
+<img
+  class="rotate-img"
+  id="rotateMe"
+  src="https://img1.wsimg.com/isteam/ip/0a69be8e-0773-4d49-bea7-7fb27c585ff3/ChatGPT%20Image%2018%20nov%202025%2C%2012_49_35%20p.-0fadac7.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25">
+>
+
+<script>
+let lastScroll = window.scrollY;
+let angle = 0;
+
+window.addEventListener("scroll", () => {
+  const img = document.getElementById("rotateMe");
+  const currentScroll = window.scrollY;
+
+  if (currentScroll > lastScroll) {
+    angle += 4;   // bajar → derecha
+  } else {
+    angle -= 4;   // subir → izquierda
+  }
+
+  img.style.transform = `translateX(-50%) rotateY(${angle}deg)`;
+
+  lastScroll = currentScroll;
+});
+</script>
+
+</body>
+</html>
