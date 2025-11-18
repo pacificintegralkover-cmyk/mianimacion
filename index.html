@@ -8,10 +8,7 @@
   body {
     margin: 0;
     padding: 0;
-    height: 200vh; /* espacio para hacer scroll */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 200vh; /* altura para poder hacer scroll */
     background: #ffffff;
     font-family: sans-serif;
   }
@@ -19,43 +16,41 @@
   .rotate-img {
     width: 420px;
     max-width: 90%;
-    transform-style: preserve-3d;
-    will-change: transform;
-    transition: transform 0.03s linear;
     position: fixed;
     top: 120px;
     left: 50%;
-    transform: translateX(-50%);
+    transform-style: preserve-3d;
+    transform: translateX(-50%) rotateY(0deg);
+    transition: transform 0.15s linear;
+    will-change: transform;
   }
 </style>
 </head>
 
 <body>
 
-<img
-  class="rotate-img"
-  id="rotateMe"
-  src="https://img1.wsimg.com/isteam/ip/0a69be8e-0773-4d49-bea7-7fb27c585ff3/ChatGPT%20Image%2018%20nov%202025%2C%2012_49_35%20p.-0fadac7.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25">
->
+<img class="rotate-img" id="rotateMe" src="imagen.png">
 
 <script>
-let lastScroll = window.scrollY;
-let angle = 0;
+  let lastScroll = window.scrollY;
+  let rotation = 0;
 
-window.addEventListener("scroll", () => {
-  const img = document.getElementById("rotateMe");
-  const currentScroll = window.scrollY;
+  window.addEventListener("scroll", () => {
+    const current = window.scrollY;
 
-  if (currentScroll > lastScroll) {
-    angle += 4;   // bajar → derecha
-  } else {
-    angle -= 4;   // subir → izquierda
-  }
+    if (current > lastScroll) {
+      // Scroll hacia abajo → gira a la derecha
+      rotation += 4;
+    } else {
+      // Scroll hacia arriba → gira a la izquierda
+      rotation -= 4;
+    }
 
-  img.style.transform = `translateX(-50%) rotateY(${angle}deg)`;
+    document.getElementById("rotateMe").style.transform =
+      `translateX(-50%) rotateY(${rotation}deg)`;
 
-  lastScroll = currentScroll;
-});
+    lastScroll = current;
+  });
 </script>
 
 </body>
